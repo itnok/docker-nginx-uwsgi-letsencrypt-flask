@@ -24,9 +24,6 @@ https://www.mattsvensson.com/nerdings/2017/6/30/docker-flasknginxuwsgi
     All of the files+folders in this repo will be, by default, put into /home/flask.  If you modify this you need to update the Dockerfile.
     The /home/flask/app folder will contain the Flask app.  As long as the wsgi.py file uses "app" not "application," you can swap in and out any flask app that you want (so long as you have the necessary libraries installed).
   
-  
-  
-  
 ## Services/Notes
 - <b>Be sure docker is installed.  If not installed, run install_docker.sh</b>
 - This script uses linux's Supervisor to monitor and control uWSGI and nginx.
