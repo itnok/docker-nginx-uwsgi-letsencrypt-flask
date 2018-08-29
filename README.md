@@ -11,7 +11,10 @@ With this container and a built image (or pulling the image from ucnt/flaskwebpa
 - HTTPS (change parameters): sudo docker run -d -p 80:80 -p 443:443 --restart=always -t --name flaskwebpage flaskwebpage "-d example.com,www.example.com -n example.com -e my@email.com" 
 
 Notes: 
-- If you arleady setupt he server as HTTP and you want HTTPS, run: /home/flask/conf/setup-https.py -d [domain_list_csv] -n [certname] -e [email_address]
+- If you arleady setupt he server as HTTP and have port 443 open and you want HTTPS, run: 
+
+/home/flask/conf/setup-https.py -d [domain_list_csv] -n [certname] -e [email_address]
+
 - You can access the container via: sudo docker exec -i -t flaskwebpage /bin/bash
 
 ## More thoughts:
