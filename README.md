@@ -11,17 +11,11 @@ With this container and a built image (or pulling the image from ucnt/flaskwebpa
   OR
   - HTTPS (change parameters): sudo docker run -d -p 80:80 -p 443:443 --restart=always -t --name flaskwebpage flaskwebpage "-d example.com,www.example.com -n example.com -e my@email.com" 
 
-Notes: 
-- If you arleady setupt he server as HTTP and have port 443 open and you want HTTPS, run: 
-
-/home/flask/conf/setup-https.py -d [domain_list_csv] -n [certname] -e [email_address]
-
-- You can access the container via: sudo docker exec -i -t flaskwebpage /bin/bash
-
 ## More thoughts:
 https://www.mattsvensson.com/nerdings/2017/6/30/docker-flasknginxuwsgi
 
 ## Notes/Details:
+- You can access the container via: sudo docker exec -i -t flaskwebpage /bin/bash
 - Current Folder/File Sctructure:
     - All of the files+folders in this repo will be, by default, put into /home/flask.  
     - The /home/flask/app folder will contain the Flask app.  You can swap in and out any flask app that you want (so long as you have the necessary libraries installed).
