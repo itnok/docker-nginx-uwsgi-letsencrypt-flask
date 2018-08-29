@@ -16,12 +16,13 @@ https://www.mattsvensson.com/nerdings/2017/6/30/docker-flasknginxuwsgi
 
 ## Notes/Details:
 - You can access the container via: sudo docker exec -i -t flaskwebpage /bin/bash
-- Current Folder/File Sctructure:
-    - All of the files+folders in this repo will be, by default, put into /home/flask.  
-    - The /home/flask/app folder will contain the Flask app.  You can swap in and out any flask app that you want (so long as you have the necessary libraries installed).
-- Optional method
-    - You can add a parameter to the RUN command to mount a local volumne to a directory in the container.  Benefit is this allows you to edit the files without having to go into the container.
-    - Example additional parameter: -v /home/user/flask/app:/home/flask/app
+- Folder/File Sctructure:
+    - Current
+        - All of the files+folders in this repo will be, by default, put into /home/flask.  
+        - The /home/flask/app folder will contain the Flask app.  You can swap in and out any flask app that you want (so long as you have the necessary libraries installed).
+    - Optional method
+        - You can add a parameter to the RUN command to mount a local volumne to a directory in the container.  Benefit is this allows you to edit the files without having to go into the container.
+        - Example additional parameter: -v /home/user/flask/app:/home/flask/app
   
 ## Services/Notes
 - <b>Be sure docker is installed.  If not installed, run install_docker.sh</b>
