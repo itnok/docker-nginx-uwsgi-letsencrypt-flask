@@ -15,6 +15,7 @@ With this container and a built image (or pulling the image from ucnt/flaskwebpa
 https://www.mattsvensson.com/nerdings/2017/6/30/docker-flasknginxuwsgi
 
 ## Notes/Details:
+- <b>Be sure docker is installed.  If not installed, run install_docker.sh</b>
 - You can access the container via: sudo docker exec -i -t flaskwebpage /bin/bash
 - Folder/File Sctructure:
     - Current
@@ -23,9 +24,6 @@ https://www.mattsvensson.com/nerdings/2017/6/30/docker-flasknginxuwsgi
     - Optional method
         - You can add a parameter to the RUN command to mount a local volumne to a directory in the container.  Benefit is this allows you to edit the files without having to go into the container.
         - Example additional parameter: -v /home/user/flask/app:/home/flask/app
-  
-## Services/Notes
-- <b>Be sure docker is installed.  If not installed, run install_docker.sh</b>
 - This script uses linux's Supervisor to monitor and control uWSGI and nginx.
 - Port 443 is left on the run command in case you want to use it.  If you never will, you can remove "-p 443:443"
 
