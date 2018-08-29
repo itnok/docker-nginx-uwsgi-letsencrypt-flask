@@ -11,10 +11,10 @@
 # sudo docker run -d -p 80:80 --restart=always -t --name flaskwebpage flaskwebpage
 #
 # Setup HTTPS Automatically with domain name (-d), cert name (-n) and email (-e).  DOMAIN ONLY:
-# sudo docker run -d -p 80:80 -p 443:443 --restart=always -t --name flaskwebpage \ flaskwebpage "-d example.com,www.example.com -n example.com -e my@email.com"
+# sudo docker run -d -p 80:80 -p 443:443 --restart=always -t --name flaskwebpage flaskwebpage "-d example.com,www.example.com -n example.com -e my@email.com"
 #
 # Run for HTTPS but set up HTTPS certs later:
-# sudo docker run -d -p 80:80 -p 443:443 --restart=always -t --name flaskwebpage \ flaskwebpage
+# sudo docker run -d -p 80:80 -p 443:443 --restart=always -t --name flaskwebpage flaskwebpage
 #
 #    Setup HTTPS after starting the container as HTTP:
 #        - Run: /home/flask/conf/setup-https.py -d [domain_list_csv] -n [certname] -e [email_address]
