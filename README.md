@@ -4,11 +4,11 @@
 Provide Dockerfile and all applicable config and base Flask scripts necessary to start a webpage, with a script to automate HTTPS re-configuration.
 
 ## Why do I use it?:
-(Be sure docker is installed.  If not installed, run install_docker.sh) <br>
+(Be sure docker is installed.  If not installed, run install_docker.sh) 
 
 With this container and a built image (or pulling the image from ucnt/flaskwebpage), you can get an HTTP or HTTPS server setup in 1 commands
-- HTTP: sudo docker run -d -p 80:80 -p 443:443 --restart=always -t --name flaskwebpage flaskwebpage <br>
-- HTTPS (change parameters): sudo docker run -d -p 80:80 -p 443:443 --restart=always -t --name flaskwebpage flaskwebpage "-d example.com,www.example.com -n example.com -e my@email.com" <br>
+- HTTP: sudo docker run -d -p 80:80 -p 443:443 --restart=always -t --name flaskwebpage flaskwebpage 
+- HTTPS (change parameters): sudo docker run -d -p 80:80 -p 443:443 --restart=always -t --name flaskwebpage flaskwebpage "-d example.com,www.example.com -n example.com -e my@email.com" 
 
 Notes: 
 - If you arleady setupt he server as HTTP and you want HTTPS, run: /home/flask/conf/setup-https.py -d [domain_list_csv] -n [certname] -e [email_address]
@@ -18,50 +18,46 @@ Notes:
 https://www.mattsvensson.com/nerdings/2017/6/30/docker-flasknginxuwsgi
 
 ## Notes/Details:
-<ul>
-  <li><b>Folder/File Sctructure</b></li>
-  <ul>
-    <li>All of the files+folders in this repo will be, by default, put into /home/flask.  If you modify this you need to update the Dockerfile.</li>
-    <li>The /home/flask/app folder will contain the Flask app.  As long as the wsgi.py file uses "app" not "application," you can swap in and out any flask app that you want (so long as you have the necessary libraries installed).</li>
-  </ul>
+- Folder/File Sctructure:
+    All of the files+folders in this repo will be, by default, put into /home/flask.  If you modify this you need to update the Dockerfile.
+    The /home/flask/app folder will contain the Flask app.  As long as the wsgi.py file uses "app" not "application," you can swap in and out any flask app that you want (so long as you have the necessary libraries installed).
   
-  <br>
   
-  <li><b>Services/Notes</b></li>
-  <ul>
-    <li>This script uses linux's Supervisor to monitor and control uWSGI and nginx.</li>
-    <li>Port 443 is left on the run command in case you want to use it.  If you never will, you can remove "-p 443:443"</li>
-</ul>  
+  
+  
+## Services/Notes
+- This script uses linux's Supervisor to monitor and control uWSGI and nginx.
+- Port 443 is left on the run command in case you want to use it.  If you never will, you can remove "-p 443:443"
+  
 
-  <br>
+## HTTPS Setup Options (assumes 1 domain per container instance)
+  
+- Easy way: Put the domain info in the docker run command: 
 
-  <li><b>HTTPS Setup Options (assumes 1 domain per container instance)</b></li>
-  <ul>
-  <li><b>Do it the easy way!</b> Go into the container and run a command like one of the below examples to automate the setup via a custom script I wrote.  Before running it, yes, <b>you should own the domain and have updated the DNS records</b>.</li>
-      - /home/flask/conf/setup-https.py -d test.com -n test.com -e test@test.com
-      <br>
-      - /home/flask/conf/setup-https.py -d test.com,www.test.com -n test.com -e test@test.com
-      <br>
-    <li>Do it the hard way: 
-      <br>
-    - If you want to use Let's Encrpyt: Run "/home/flask/certbot-auto certonly -d [YOURDOMAIN] -w /home/flask/app" or else copy your existing certs to the folder of your choice.
-      <br>
+sudo docker run -d -p 80:80 -p 443:443 --restart=always -t --name flaskwebpage flaskwebpage "-d example.com,www.example.com -n example.com -e my@email.com"
+
+- Semi-easy way: Run the docker container for 443 as well as 80 then run the automated setup script after the container is up:
+
+sudo docker run -d -p 80:80 -p 443:443 --restart=always -t --name flaskwebpage flaskwebpage
+
+/home/flask/conf/setup-https.py -d example.com,www.example.com -n example.com -e my@email.com
+
+- HARD way: Run "/home/flask/certbot-auto certonly -d [YOURDOMAIN] -w /home/flask/app" or copy your existing certs to the folder of your choice.  THEN...
+      
     - Adjust /home/flask/conf/nginx-https-template.conf to use HTTPS by replacing YOURDOMAIN with the domain you are setting up and, if you copied a cert into a folder, change the directory from /etc/letsencrpyt/live
-      <br>
+      
     - Remove /etc/nginx/sites-enabled/nginx-http.conf
-      <br>
+      
     - Re-link ntinx-https.conf to /etc/nginx/sites-enabled: ln -s /home/flask/conf/nginx-https-template.conf /etc/nginx/sites-enabled/nginx-http.conf
-      <br>
-    - Restart the supervisor service</li>
-  </ul>  
+      
+    - Restart the supervisor service
+    
   
-  <br>
   
-  <li><b>Credits</b></li>
-  <ul>
-    <li>Credit to Thatcher Peskens (https://github.com/atupal/dockerfile.flask-uwsgi-nginx), who this code was forked from.</li>
-  </ul>  
+##Credits
+Credit to Thatcher Peskens (https://github.com/atupal/dockerfile.flask-uwsgi-nginx), who this code was forked from.
+    
 
-</ul>
+
 
 
