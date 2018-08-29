@@ -4,7 +4,6 @@
 Provide Dockerfile and all applicable config and base Flask scripts necessary to start a webpage, with a script to automate HTTPS re-configuration.
 
 ## Why do I use it?:
-<b>(Be sure docker is installed.  If not installed, run install_docker.sh)</b>
 
 With this container and a built image (or pulling the image from ucnt/flaskwebpage), <b>you can get an HTTP or HTTPS server setup in 1 command</b>:
 - HTTP: sudo docker run -d -p 80:80 -p 443:443 --restart=always -t --name flaskwebpage flaskwebpage 
@@ -29,9 +28,10 @@ https://www.mattsvensson.com/nerdings/2017/6/30/docker-flasknginxuwsgi
   
   
 ## Services/Notes
+- <b>Be sure docker is installed.  If not installed, run install_docker.sh</b>
 - This script uses linux's Supervisor to monitor and control uWSGI and nginx.
 - Port 443 is left on the run command in case you want to use it.  If you never will, you can remove "-p 443:443"
-  
+
 
 ## HTTPS Setup Options (assumes 1 domain per container instance)
   
