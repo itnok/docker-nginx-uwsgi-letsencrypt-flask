@@ -48,8 +48,8 @@ sudo docker run -d -p 80:80 -p 443:443 --restart=always -t --name flaskwebpage f
 
 ### HARD way: 
 
-Run: /home/flask/certbot-auto certonly -d [YOURDOMAIN] -w /home/flask/app
-OR 
+Run: /home/flask/certbot-auto certonly -d [YOURDOMAIN] -w /home/flask/app<br>
+OR <br>
 Copy your existing certs to the folder of your choice.  THEN...
 
   - Adjust /home/flask/conf/nginx-https-template.conf to use HTTPS by replacing YOURDOMAIN with the domain you are setting up and, if you copied a cert into a folder, change the directory from /etc/letsencrpyt/live
