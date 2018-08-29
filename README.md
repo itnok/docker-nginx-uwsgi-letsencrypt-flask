@@ -32,17 +32,21 @@ https://www.mattsvensson.com/nerdings/2017/6/30/docker-flasknginxuwsgi
 
 ## HTTPS Setup Options (assumes 1 domain per container instance)
   
-### Easy way: Put the domain info in the docker run command: 
+### Easy way: 
+
+Put the domain info in the docker run command: 
 
 sudo docker run -d -p 80:80 -p 443:443 --restart=always -t --name flaskwebpage flaskwebpage "-d example.com,www.example.com -n example.com -e my@email.com"
 
-- <b>Semi-easy way</b>: Run the docker container for 443 as well as 80 then run the automated setup script after the container is up:
+### Semi-easy way: 
+
+Run the docker container for 443 as well as 80 then run the automated setup script after the container is up:
 
 sudo docker run -d -p 80:80 -p 443:443 --restart=always -t --name flaskwebpage flaskwebpage
 
 /home/flask/conf/setup-https.py -d example.com,www.example.com -n example.com -e my@email.com
 
-- <b>HARD way</b>: 
+### HARD way: 
 
 Run: /home/flask/certbot-auto certonly -d [YOURDOMAIN] -w /home/flask/app
 OR 
