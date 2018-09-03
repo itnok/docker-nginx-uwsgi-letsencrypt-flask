@@ -7,9 +7,9 @@ Provide Dockerfile and all applicable config and base Flask scripts necessary to
 
 With this container and a built image (or pulling the image from ucnt/flaskwebpage), <b>you can get an HTTP or HTTPS server setup in 2 commands</b>:
 - sudo docker build -t flaskwebpage .
-  - HTTP: sudo docker run -d -p 80:80 -p 443:443 --restart=always -t --name flaskwebpage flaskwebpage <br>
+  - HTTP: sudo docker run -dit -p 80:80 --restart=always --name flaskwebpage flaskwebpage <br>
   OR
-  - HTTPS (change parameters): sudo docker run -d -p 80:80 -p 443:443 --restart=always -t --name flaskwebpage flaskwebpage "-d example.com,www.example.com -n example.com -e my@email.com" 
+  - HTTPS (change parameters): sudo docker run -dit -p 80:80 -p 443:443 --restart=always --name flaskwebpage flaskwebpage "-d example.com,www.example.com -n example.com -e my@email.com" 
 
 ## More thoughts:
 https://www.mattsvensson.com/nerdings/2017/6/30/docker-flasknginxuwsgi
@@ -34,13 +34,13 @@ https://www.mattsvensson.com/nerdings/2017/6/30/docker-flasknginxuwsgi
 
 Put the domain info in the docker run command: 
 
-sudo docker run -d -p 80:80 -p 443:443 --restart=always -t --name flaskwebpage flaskwebpage "-d example.com,www.example.com -n example.com -e my@email.com"
+sudo docker run -dit -p 80:80 -p 443:443 --restart=always --name flaskwebpage flaskwebpage "-d example.com,www.example.com -n example.com -e my@email.com"
 
 ### Semi-easy way: 
 
 Run the docker container for 443 as well as 80 then run the automated setup script after the container is up:
 
-sudo docker run -d -p 80:80 -p 443:443 --restart=always -t --name flaskwebpage flaskwebpage
+sudo docker run -dit -p 80:80 -p 443:443 --restart=always --name flaskwebpage flaskwebpage
 
 /home/flask/conf/setup-https.py -d example.com,www.example.com -n example.com -e my@email.com
 
