@@ -19,13 +19,13 @@ def index():
 @app.route("/ip_address") 
 def ip_address():
     try:
-        from urllib2 import urlopen
-        public_ip = urlopen('http://ipv4.icanhazip.com').read().strip()
-        container_ip = os.popen(''' ip addr show eth0 | grep "inet" | awk '{print $2}' | cut -d/ -f1 | cut -d$'\n' -f 1''').read().strip()
+        import requests
+        public_ip = requests.get('http://ipv4.icanhazip.com').text.strip()
+        request_ip = request.remote_addr
         return '''
 Public IP: {public_ip} <br>
-Container IP: {container_ip}
-'''.format(public_ip=public_ip, container_ip=container_ip)
+Request IP: {request_ip} <br>
+'''.format(public_ip=public_ip, request_ip=request_ip)
     except:
         return get_exception()    
     

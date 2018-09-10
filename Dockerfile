@@ -32,13 +32,11 @@ run chmod +x /home/flask/conf/setup-https.py
 run apt-get update
 run apt-get install -y software-properties-common
 run add-apt-repository -y ppa:nginx/stable
-run apt-get install -y build-essential nano nginx python3 python3-dev python3-setuptools python3-software-properties python3-pip supervisor wget
-run apt-get install -y build-essential python python-dev python-setuptools python-software-properties python-pip
-
+run apt-get install -y build-essential nano nginx net-tools python3 python3-dev python3-setuptools python3-software-properties python3-pip supervisor wget
+run pip3 install --upgrade pip
 
 # Install uwsgi and flask via the requirements.txt file
 run pip3 install -r /home/flask/conf/requirements.txt
-run pip install -r /home/flask/conf/requirements.txt
 
 
 #Update all the things
