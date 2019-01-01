@@ -44,7 +44,7 @@ def remove_prior_folders(cert_name=args.cert_name):
 
 
 def get_cert(domain_names, cert_name, email_address):
-    'Attempts to get a cert through letsencrypt for the given domain and email'    
+    'Attempts to get a cert through letsencrypt for the given domain and email'
     command = '''{current_dir}/certbot-auto \
     certonly \
     --non-interactive \
@@ -56,10 +56,10 @@ def get_cert(domain_names, cert_name, email_address):
     '''.format(current_dir=current_dir, parent_dir=parent_dir, cert_name=cert_name, email_address=email_address, domain_names=domain_names)
     print_message("Starting certbot-auto with:\n\n{command}".format(command=command))
     output = get_command_output(command)
-    
+
     print_message("certbot-auto output:\n\n{output}".format(output=output))
 
-    #Check and be sure that HTTPS was setup successfully  
+    #Check and be sure that HTTPS was setup successfully
     if "Congratulations! Your certificate and chain have been saved" in output:
         return True
     else:
@@ -67,12 +67,12 @@ def get_cert(domain_names, cert_name, email_address):
 
 
 def configure_https(domain_names, cert_name):
-    'Reconfigures nginx for https'
-    print_message("Reconfiguring nginx for https")
+    'Reconfigures Nginx for HTTPS'
+    print_message("Reconfiguring Nginx for HTTPS")
 
     print_message("Replacing 'YOURDOMAIN' with cert_name {cert_name} and domains {domain_names} in {nginx_https_file}".format(cert_name=cert_name, domain_names=domain_names, nginx_https_file=nginx_https_file))
 
-    #Write the new nginx config file, keeping the template for future use
+    #Write the new Nginx config file, keeping the template for future use
     template_file = open(nginx_https_template_file, "r")
     config_file = open(nginx_https_file, "w+")
     for line in template_file:
@@ -94,7 +94,7 @@ def configure_https(domain_names, cert_name):
 
     #Create a symbolic link for the HTTPS config
     command = "ln -s {nginx_https_file} /etc/nginx/sites-enabled/".format(nginx_https_file=nginx_https_file)
-    print_message("Setting up symbolic link for HTTPS nginx config:\n\n{command}".format(command=command))
+    print_message("Setting up symbolic link for HTTPS Nginx config:\n\n{command}".format(command=command))
     output = get_command_output(command)
 
 
@@ -152,4 +152,4 @@ if __name__ == '__main__':
         setup_cron_renew()
         restart_supervisor()
     else:
-        print_message("Letsencrypt cert was not successfully setup")
+        print_message("Letsencrypt cert was NOT successfully setup")

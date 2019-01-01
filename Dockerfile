@@ -1,5 +1,5 @@
 ###############################################################################################
-# Purpose:  Provide a nginx+uwsgi+Flask container on Ubuntu 16.04 via ports 80 and 443
+# Purpose: Containerized Flask app served via Nginx+uWSGI on Ubuntu 16.04 over ports 80 and 443
 #
 # Forked from Matt Svensson <matt.svensson@gmail.com>
 #    github - https://github.com/Ucnt/docker-flask-nginx-uwsgi
@@ -36,17 +36,17 @@
 
 FROM ubuntu:16.04
 
-# Add all local code to the docker container and
+# Add all local code to the docker container
 COPY . /home/flask/
 
 RUN \
-# Change the HTTPS config scripts to executable
+# Make executable the HTTPS config scripts
     chmod +x /home/flask/conf/setup-https.py && \
 # Install basic requiremements
     apt-get update && \
     apt-get install -y \
         software-properties-common && \
-# Add latest nginx repo and install base programs
+# Add latest Nginx repo
     add-apt-repository -y \
         ppa:nginx/stable && \
 # Update everything to the latest release
