@@ -36,6 +36,9 @@
 
 FROM ubuntu:16.04
 
+# Set non interactive frontend for apt-get
+ARG DEBIAN_FRONTEND=noninteractive
+
 # Add all local code to the docker container
 COPY . /home/flask/
 
@@ -44,7 +47,7 @@ RUN \
     chmod +x /home/flask/conf/setup-https.py && \
 # Install basic requiremements
     apt-get update && \
-    apt-get install -y \
+    apt-get install -y --no-install-recommends \
         software-properties-common && \
 # Add latest Nginx repo
     add-apt-repository -y \
@@ -53,19 +56,22 @@ RUN \
     apt-get update && \
     apt-get upgrade -y && \
 # Install packages and dependencies
-    apt-get install -y \
+    apt-get install -y --no-install-recommends \
         software-properties-common \
         build-essential \
         vim \
         nginx \
         net-tools \
         python3-dev \
-        python3-setuptools \
         python3-software-properties \
         supervisor \
         wget && \
 # Install pip3
-    easy_install3 pip && \
+    wget -O \
+        /tmp/get-pip.py \
+        https://bootstrap.pypa.io/get-pip.py && \
+    python3 /tmp/get-pip.py && \
+    rm -rf /tmp/get-pip.py && \
 # Install python requirements
     pip3 install -r \
         /home/flask/conf/requirements.txt && \
