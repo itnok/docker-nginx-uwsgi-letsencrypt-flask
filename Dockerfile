@@ -77,6 +77,11 @@ RUN \
         /home/flask/conf/requirements.txt && \
 # Config all the things, inititally for HTTP, not HTTPS
     rm -rf \
+        /etc/nginx/nginx.conf && \
+    cp \
+        /home/flask/conf/nginx.conf \
+        /etc/nginx/nginx.conf && \
+    rm -rf \
         /etc/nginx/sites-enabled/default && \
     ln -s \
         /home/flask/conf/nginx-http.conf \
