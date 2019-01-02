@@ -30,17 +30,6 @@ Request IP: {request_ip} <br>
         return get_exception()    
     
 
-#Letsencrypt certbot
-@app.route('/.well-known/acme-challenge/<token_value>')
-def letsencrpyt(token_value):
-    try:
-        with open('{current_directory}/.well-known/acme-challenge/{token_value}'.format(current_directory=current_directory, token_value=token_value)) as f:
-            answer = f.readline().strip()
-        return str(answer)
-    except:
-        return get_exception()
-
-
 #Displays the 500 error
 @app.errorhandler(500)
 def get_500_error(error):

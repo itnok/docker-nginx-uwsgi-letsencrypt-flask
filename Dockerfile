@@ -94,7 +94,9 @@ RUN \
         /home/flask/conf/certbot-auto \
         https://dl.eff.org/certbot-auto && \
     chmod a+x \
-        /home/flask/conf/certbot-auto
+        /home/flask/conf/certbot-auto && \
+# Create acme-challenge directory to decouple Letsencrpyt/Certbot from uWSGI/Flask
+    mkdir -p /var/www/html/.well-known/acme-challenge
 
 # Expose both ports in case you want to start using HTTPS
 EXPOSE 80 443
