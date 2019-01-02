@@ -50,7 +50,7 @@ def get_cert(domain_names, cert_name, email_address):
     --non-interactive \
     --agree-tos \
     --cert-name "{cert_name}" \
-    --webroot -w "{parent_dir}/app" \
+    --webroot -w "/var/www/html" \
     --email "{email_address}" \
     -d "{domain_names}"
     '''.format(current_dir=current_dir, parent_dir=parent_dir, cert_name=cert_name, email_address=email_address, domain_names=domain_names)
