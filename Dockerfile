@@ -65,6 +65,8 @@ RUN \
         python3-dev \
         python3-software-properties \
         supervisor \
+        dirmngr \
+        gnupg2 \
         wget && \
 # Install pip3
     wget -O \
@@ -95,8 +97,22 @@ RUN \
         https://dl.eff.org/certbot-auto && \
     chmod a+x \
         /home/flask/conf/certbot-auto && \
+# Check Certbot is authentic
+    wget -O \
+        /tmp/certbot-auto.asc \
+        https://dl.eff.org/certbot-auto.asc && \
+    gpg2 \
+        --keyserver pool.sks-keyservers.net \
+        --recv-key A2CFB51FA275A7286234E7B24D17C995CD9775F2 && \
+    gpg2 \
+        --trusted-key 4D17C995CD9775F2 \
+        --verify /tmp/certbot-auto.asc \
+        /home/flask/conf/certbot-auto && \
+    rm -rf /tmp/certbot-auto.asc && \
 # Create acme-challenge directory to decouple Letsencrpyt/Certbot from uWSGI/Flask
-    mkdir -p /var/www/html/.well-known/acme-challenge
+    mkdir -p /var/www/html/.well-known/acme-challenge && \
+# Clean apt cache to save disk space and make image leaner
+    apt-get clean
 
 # Expose both ports in case you want to start using HTTPS
 EXPOSE 80 443
