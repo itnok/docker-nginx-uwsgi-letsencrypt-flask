@@ -111,6 +111,8 @@ RUN \
     rm -rf /tmp/certbot-auto.asc && \
 # Create acme-challenge directory to decouple Letsencrpyt/Certbot from uWSGI/Flask
     mkdir -p /var/www/html/.well-known/acme-challenge && \
+# Create Diffie-Hellman parameter for DHE ciphersuites (very lengthy operation!) 
+    openssl dhparam -out /etc/ssl/certs/dhparam.pem 4096 && \
 # Clean apt cache to save disk space and make image leaner
     apt-get clean
 

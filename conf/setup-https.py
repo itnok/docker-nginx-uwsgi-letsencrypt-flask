@@ -83,6 +83,9 @@ def configure_https(domain_names, cert_name):
             #Just add the cert_name to the cert path, e.g. /etc/letsencrypt/live/YOURDOMAIN/fullchain.pem
             elif "ssl_certificate" in line:
                 line = line.replace("YOURDOMAIN", cert_name)
+            #Just add the cert_name to the cert path, e.g. /etc/letsencrypt/live/YOURDOMAIN/fullchain.pem
+            elif "ssl_trusted_certificate" in line:
+                line = line.replace("YOURDOMAIN", cert_name)
         config_file.write(line)
     template_file.close()
     config_file.close()
