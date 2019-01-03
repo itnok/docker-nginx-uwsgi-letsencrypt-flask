@@ -8,5 +8,8 @@ if [ -n "${1}" ]; then
 fi
 
 # start supervisord to bring up webserver and sleep to be sure it's up
-supervisord -c /etc/supervisor/conf.d/supervisor.conf
+service supervisor start
+
+# keep the container running...
+tail -f /dev/null
 
